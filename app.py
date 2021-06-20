@@ -186,9 +186,9 @@ def main():
         sw_df['Outlet Reach (Monthly)'] = pd.to_numeric(sw_df['Outlet Reach (Monthly)'], errors='coerce')
         sw_df['Outlet Reach (Weekly)'] = sw_df['Outlet Reach (Monthly)'] /4
         
-        # ####################################################################
-        # ### Merge Google RSS DF & Similar Web DF ### 
-        # #################################################################### 
+        ####################################################################
+        ### Merge Google RSS DF & Similar Web DF ### 
+        #################################################################### 
 
         # config path
         cfg_path = "config.yaml"
