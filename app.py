@@ -30,7 +30,6 @@ import yaml
 import os
 
 import errors
-import config
 
 from PIL import Image
 
