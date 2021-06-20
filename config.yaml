@@ -1,0 +1,147 @@
+# AB URL Helper config file
+
+#------------------------------------------------
+# tracker format
+#------------------------------------------------
+
+num_tracker_cols: 42
+source_type_colname: Media Type
+weekly_reach_colname: Outlet Reach (Weekly)
+monthly_reach_colname: Outlet Reach (Monthly)
+article_title_colname: Article Title
+
+tracker_cols:
+    0: Date
+    1: Outlet Name
+    2: Outlet Reach (Weekly)
+    3: Outlet Reach (Monthly)
+    4: Article Title
+    6: Author
+    7: Market
+    8: Media Type
+    41: Link
+    # Merge dummy variable
+    42: Outlet Domain
+    
+types: # types of data inputs
+    - mediawatch_internet
+    - mediawatch_broadcast
+    - tveyes
+    - trendkite
+    
+source_mapping:
+    News: Online
+    Broadcast: Broadcast
+    Blog: Online
+    Radio: Radio
+    Television: TV
+
+#------------------------------------------------
+# format guidelines
+#------------------------------------------------
+
+# THIS IS AN EXAMPLE
+example_platform:       # platform name
+    format: csv         # which format (csv, excel)
+    skip_rows: 6        # how many (if none, 0) rows to skip
+
+    cols:               # which columns to use from raw data
+        Date: Date      # with edited names to match tracker
+        Media Outlet: Outlet Name
+        Readership: Outlet Reach (Weekly)
+        Title: Article Title
+        Author: Author
+        Link: Link
+
+#------------------------------------------------
+# trendkite format
+#------------------------------------------------
+
+trendkite:
+    format: csv
+    skip_rows: 3
+
+    cols:
+        Date: Date
+        Media Outlet: Outlet Name
+        Readership: Outlet Reach (Monthly)
+        Title: Article Title
+        Author: Author
+        Media Type: Media Type
+        Link: Link
+        
+    map_source:
+        News: Online
+        Broadcast: Broadcast
+        Blog: Online
+        
+        # Tracker contains source types of
+        # Magazine, Social, Online, TV, Trade
+
+#------------------------------------------------
+# mediawatch format
+#------------------------------------------------
+
+# internet format
+mediawatch_internet:
+    format: excel
+    skip_rows: 0
+    URL_col_index: 34
+        
+    cols:
+        Date: Date
+        Source: Outlet Name
+        UniqueVisitors: Outlet Reach (Monthly)
+        Title: Article Title
+        URL: Link
+        
+    unique_cols:
+        - Web Reach Rank
+        - Web Reach Per Million
+        - Web Page Views Rank
+        - Web Page Views Per Million
+        
+    item_type:
+        - Web
+
+
+# broadcast format
+mediawatch_broadcast:
+    format: excel
+    skip_rows: 0
+    type_col: Item Type
+
+    cols:
+        Date: Date
+        Source: Outlet Name
+        Ratings Estimate: Outlet Reach (Monthly)
+        Title: Article Title
+        Item Type: Media Type # not in original df, calculated
+        URL: Link
+        
+    unique_cols:
+        - Text
+        
+    item_type:
+        - Radio
+        - Television
+        
+    map_source:
+        Radio: Radio
+        Television: TV
+
+#------------------------------------------------
+# tveyes format
+#------------------------------------------------
+
+tveyes:
+    format: csv
+    skip_rows: 0
+    local_viewership: Local Viewership
+        
+    cols:
+        Date: Date
+        Outlet: Outlet Name
+        "National/Cable Viewership": Outlet Reach (Monthly)
+        Local Viewership: Local Viewership
+        Title: Article Title
